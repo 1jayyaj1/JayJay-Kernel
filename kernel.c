@@ -6,6 +6,11 @@
 
 List *l;
 
+void myinit(char* filename) {
+    //TO IMPLEMENT
+    printf("Function myinit still needs to be implemented.");
+}
+
 int main() {
     char userInput[1000];
     char prompt[100] = {'$', '\0'};
