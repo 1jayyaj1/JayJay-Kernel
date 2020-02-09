@@ -6,7 +6,7 @@
 
 List *l;
 
-int main() {
+void shellUI() {
     char userInput[1000];
     char prompt[100] = {'$', '\0'};
     l = List_create();
