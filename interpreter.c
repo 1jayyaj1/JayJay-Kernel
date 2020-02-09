@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h> 
 #include "shellmemory.h"
+#include "kernel.h"
 
 int interpret(char** parsedInput, List *l);
 
@@ -94,6 +95,8 @@ int exec(char** parsedInput, List *l) {
         printf("Please use this format to execute programs: exec prog1.txt prog2.txt prog3.txt\n");
     } else { 
         //TO IMPLEMENT
+        myinit("yup");
+        scheduler();
     }
     return 0;
 }

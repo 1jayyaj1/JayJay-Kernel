@@ -8,7 +8,12 @@ List *l;
 
 void myinit(char* filename) {
     //TO IMPLEMENT
-    printf("Function myinit still needs to be implemented.");
+    printf("Function myinit still needs to be implemented.\n");
+}
+
+void scheduler() {
+    //TO IMPLEMENT
+    printf("Function scheduler still needs to be implemented.\n");
 }
 
 int main() {
