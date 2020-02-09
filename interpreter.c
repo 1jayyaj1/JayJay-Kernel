@@ -89,6 +89,15 @@ int runFile(char** parsedInput, List *l) {
     return 0;
 }
 
+int exec(char** parsedInput, List *l) {
+    if (strcmp(parsedInput[4], "") != 0) {
+        printf("Please use this format to execute programs: exec prog1.txt prog2.txt prog3.txt\n");
+    } else { 
+        //TO IMPLEMENT
+    }
+    return 0;
+}
+
 int interpret(char** parsedInput, List *l) {
     if (strcmp(parsedInput[0], "help") == 0 && strcmp(parsedInput[1], "") == 0) {
         help();
@@ -98,6 +107,8 @@ int interpret(char** parsedInput, List *l) {
         printVar(parsedInput,l);
     } else if (strcmp(parsedInput[0], "run") == 0) {
         runFile(parsedInput, l);
+    } else if (strcmp(parsedInput[0], "exec") == 0) {
+        exec(parsedInput, l);
     } else if (strcmp(parsedInput[0], "quit") == 0) {
         return 1;
     } else {
