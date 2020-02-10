@@ -11,8 +11,8 @@ void addToReady(PCB* p);
 
 void myinit(char* filename) {
     //TO IMPLEMENT
-    printf("Function myinit still needs to be implemented.\n");
-    // addToRAM(file, start, end);
+    FILE *p = fopen(filename,"rt");
+    addToRAM(p, 0, 0);
     PCB* demo = makePCB(1,2);
     printf("Created demo PCB with PC value: %d\n", demo->PC);
     printf("Created demo PCB with start value: %d\n", demo->start);

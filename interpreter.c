@@ -93,9 +93,12 @@ int runFile(char** parsedInput, List *l) {
 int exec(char** parsedInput, List *l) {
     if (strcmp(parsedInput[4], "") != 0) {
         printf("Please use this format to execute programs: exec prog1.txt prog2.txt prog3.txt\n");
-    } else { 
-        //TO IMPLEMENT
-        myinit("yup");
+    } else {
+        int i = 1;
+        while (strcmp(parsedInput[i], "") != 0) {
+            myinit(parsedInput[i]);
+            i++;
+        }
         scheduler();
     }
     return 0;
