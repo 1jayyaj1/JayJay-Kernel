@@ -10,14 +10,13 @@ List *l;
 void addToReady(PCB* p);
 
 void myinit(char* filename) {
-    //TO IMPLEMENT
+    //CURRENTLY IMPLEMENTING
     FILE *p = fopen(filename,"rt");
-    addToRAM(p, 0, 0);
-    PCB* demo = makePCB(1,2);
-    printf("Created demo PCB with PC value: %d\n", demo->PC);
-    printf("Created demo PCB with start value: %d\n", demo->start);
-    printf("Created demo PCB with end value: %d\n", demo->end);
-    addToReady(demo);
+    int start = getNextAvailableIndex();
+    int end = 0;
+    addToRAM(p, &start, &end);
+    PCB* pcb = makePCB(start, end);
+    addToReady(pcb);
 }
 
 void scheduler() {

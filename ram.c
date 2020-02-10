@@ -5,6 +5,9 @@
 char* ram[1000] = { NULL };
 int nextAvailableIndex = 0;
 
+int getNextAvailableIndex() {
+    return nextAvailableIndex;
+}
 void addToRAM(FILE* p, int* start, int* end) {
     //TO IMPLEMENT
     int errCode = 0;
@@ -26,8 +29,7 @@ void addToRAM(FILE* p, int* start, int* end) {
     for (int i = 0; i < 1000; i++) {
         printf("%s\n", ram[i]);
     }
-    printf("The nextAvailableIndex is now: \n");
-    printf("%i\n", nextAvailableIndex);
+    *end = nextAvailableIndex-1;
 }
 
 void cleanRam() {
