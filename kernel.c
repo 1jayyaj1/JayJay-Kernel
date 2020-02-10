@@ -7,6 +7,7 @@
 #include "pcb.h"
 
 List *l;
+void addToReady(PCB* p);
 
 void myinit(char* filename) {
     //TO IMPLEMENT
@@ -16,11 +17,17 @@ void myinit(char* filename) {
     printf("Created demo PCB with PC value: %d\n", demo->PC);
     printf("Created demo PCB with start value: %d\n", demo->start);
     printf("Created demo PCB with end value: %d\n", demo->end);
+    addToReady(demo);
 }
 
 void scheduler() {
     //TO IMPLEMENT
     printf("Function scheduler still needs to be implemented.\n");
+}
+
+void addToReady(PCB* p) {
+    //TO IMPLEMENT
+    printf("Function addToReady still needs to be implemented.\n");
 }
 
 int main() {
