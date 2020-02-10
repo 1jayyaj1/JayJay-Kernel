@@ -25,10 +25,10 @@ void addToRAM(FILE* p, int* start, int* end) {
         nextAvailableIndex++;
     }
     fclose(p);
-    printf("The ram contains: \n");
-    for (int i = 0; i < 1000; i++) {
-        printf("%s\n", ram[i]);
-    }
+    // printf("The ram contains: \n");
+    // for (int i = 0; i < 1000; i++) {
+    //     printf("%s\n", ram[i]);
+    // }
     *end = nextAvailableIndex-1;
 }
 

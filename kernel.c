@@ -32,14 +32,14 @@ void myinit(char* filename) {
     addToRAM(p, &start, &end);
     PCB* pcb = makePCB(start, end);
     addToReady(pcb);
-    printf("RQ Tail node pcb start: ");
-    printf("%i\n", rq->tail->pcb->start);
-    printf("RQ Tail node pcb end: ");
-    printf("%i\n", rq->tail->pcb->end);
-    printf("RQ Head node pcb start: ");
-    printf("%i\n", rq->head->pcb->start);
-    printf("RQ Head node pcb end: ");
-    printf("%i\n", rq->head->pcb->end);
+    // printf("RQ Tail node pcb start: ");
+    // printf("%i\n", rq->tail->pcb->start);
+    // printf("RQ Tail node pcb end: ");
+    // printf("%i\n", rq->tail->pcb->end);
+    // printf("RQ Head node pcb start: ");
+    // printf("%i\n", rq->head->pcb->start);
+    // printf("RQ Head node pcb end: ");
+    // printf("%i\n", rq->head->pcb->end);
 }
 
 void scheduler() {
