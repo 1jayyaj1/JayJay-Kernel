@@ -3,12 +3,14 @@
 #include <string.h>
 #include "interpreter.h"
 #include "shellmemory.h"
+#include "ram.h"
 
 List *l;
 
 void myinit(char* filename) {
     //TO IMPLEMENT
     printf("Function myinit still needs to be implemented.\n");
+    // addToRAM(file, start, end);
 }
 
 void scheduler() {
