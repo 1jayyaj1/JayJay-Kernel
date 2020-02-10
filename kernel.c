@@ -4,6 +4,7 @@
 #include "interpreter.h"
 #include "shellmemory.h"
 #include "ram.h"
+#include "pcb.h"
 
 List *l;
 
@@ -11,6 +12,10 @@ void myinit(char* filename) {
     //TO IMPLEMENT
     printf("Function myinit still needs to be implemented.\n");
     // addToRAM(file, start, end);
+    PCB* demo = makePCB(1,2);
+    printf("Created demo PCB with PC value: %d\n", demo->PC);
+    printf("Created demo PCB with start value: %d\n", demo->start);
+    printf("Created demo PCB with end value: %d\n", demo->end);
 }
 
 void scheduler() {
