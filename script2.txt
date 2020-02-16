@@ -1,4 +1,1 @@
 set c 20
-set d 25
-print c
-print d

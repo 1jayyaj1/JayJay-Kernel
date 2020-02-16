@@ -104,6 +104,9 @@ void scheduler() {
         temp = getNext();
         cpu->IP = temp->pcb->PC;
         //printf("This is the start cpu->IP: %i\n",cpu->IP);
+        if ((temp->pcb->PC)+2 > temp->pcb->end) {
+            cpu->quanta = 1;
+        }
         run(cpu, l);
         temp->pcb->PC = (cpu->IP) + 1;
         //printf("This is the end cpu->IP: %i\n",temp->pcb->PC);

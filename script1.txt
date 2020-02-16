@@ -1,4 +1,5 @@
 set a 10
 set b 15
+set z 18
 print a
 print b
