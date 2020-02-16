@@ -116,6 +116,8 @@ void scheduler() {
         //printf("This is the end cpu->IP: %i\n",temp->pcb->PC);
         if (cpu->IP != temp->pcb->end) {
             addToReady(temp->pcb);
+        } else {
+            free(temp->pcb);
         }
     }
     cleanRam();
