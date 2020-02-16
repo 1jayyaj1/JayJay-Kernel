@@ -118,6 +118,7 @@ void scheduler() {
             addToReady(temp->pcb);
         }
     }
+    cleanRam();
     //printf("Ready queue is empty\n");
 }
 

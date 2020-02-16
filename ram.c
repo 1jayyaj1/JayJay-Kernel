@@ -26,7 +26,7 @@ void addToRAM(FILE* p, int* start, int* end) {
         nextAvailableIndex++;
     }
     fclose(p);
-    // printf("The ram contains: \n");
+    // printf("The ram contains after adding: \n");
     // for (int i = 0; i < 1000; i++) {
     //     printf("%s\n", ram[i]);
     // }
@@ -42,4 +42,8 @@ void cleanRam() {
         ram[i] = NULL;
     }
     nextAvailableIndex = 0;
+    // printf("The ram contains after cleaning: \n");
+    // for (int i = 0; i < 1000; i++) {
+    //     printf("%s\n", ram[i]);
+    // }
 }
