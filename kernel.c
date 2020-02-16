@@ -129,8 +129,9 @@ int main() {
     char prompt[100] = {'$', '\0'};
     l = List_create();
     rq = createReadyQueue();
+    printf("Kernel 1.0 loaded!\n");
     printf("Welcome to the JayJay shell!\n");
-    printf("Version 1.0 Created January 2020\n");
+    printf("Shell version 2.0 Updated February 2020\n");
     int leaveStatus = 0;
     do {
         int size;
