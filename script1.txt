@@ -1,3 +1,4 @@
-set x 10
-print x
-quit
+set a 10
+set b 15
+print a
+print b

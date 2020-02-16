@@ -8,6 +8,7 @@ int nextAvailableIndex = 0;
 int getNextAvailableIndex() {
     return nextAvailableIndex;
 }
+
 void addToRAM(FILE* p, int* start, int* end) {
     //TO IMPLEMENT
     int errCode = 0;
@@ -30,6 +31,10 @@ void addToRAM(FILE* p, int* start, int* end) {
     //     printf("%s\n", ram[i]);
     // }
     *end = nextAvailableIndex-1;
+}
+
+char* getInstruction(int index){
+    return ram[index];
 }
 
 void cleanRam() {
