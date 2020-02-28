@@ -34,6 +34,7 @@ void addToRAM(FILE* p, int* start, int* end) {
 }
 
 char* getInstruction(int index){
+    // printf("%s",ram[index]);
     return ram[index];
 }
 

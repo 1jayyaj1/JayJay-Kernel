@@ -5,20 +5,18 @@
 #include "shellmemory.h"
 
 void shellUI(List* l) {
-    char userInput[1000];
     char prompt[100] = {'$', '\0'};
     printf("Kernel 1.0 loaded!\n");
     printf("Welcome to the JayJay shell!\n");
     printf("Shell version 2.0 Updated February 2020\n");
-    int leaveStatus = 0;
-    do {
-        int size;
+    while(!feof(stdin)) {
         printf("%s ", prompt);
-        fgets(userInput,999,stdin);
-        size = strlen(userInput);
-        userInput[size-1]='\0';
-        leaveStatus = interpret(parse(userInput),l);
+        fflush(stdout);
+        char *line = NULL;
+        size_t linecap = 0;
+        if (getline(&line, &linecap, stdin) == -1)
+            break;
+        (void)interpret(line,l);
+        free(line);
 	}
-	while(leaveStatus == 0);
-	printf("Bye!\n");
 }

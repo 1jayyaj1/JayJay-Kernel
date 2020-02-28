@@ -1,1 +1,3 @@
-set c 20
+set y 20
+print y
+quit
