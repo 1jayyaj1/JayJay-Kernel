@@ -163,7 +163,7 @@ int runFile(char** parsedInput, int num_tokens, List *l) {
                 fclose(p);
             }
             fgets(line,999,p);
-            printf("%s", line);
+            // printf("%s", line);
         }
         fclose(p);
         return 0;
