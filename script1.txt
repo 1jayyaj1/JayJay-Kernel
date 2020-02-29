@@ -1,3 +1,2 @@
-set s1 10
-print s1
-quit
+set x 10
+print x

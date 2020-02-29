@@ -12,7 +12,6 @@ PCB *pcb_create(int p, int s, int e) {
 }
 
 PCB* makePCB(int start, int end) {
-    //TO IMPLEMENT
     PCB* pcb = pcb_create(start, start, end);
     return pcb;
 }

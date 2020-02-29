@@ -11,4 +11,3 @@ typedef struct ReadyQueue {
     struct ReadyQueueNode *head;
     struct ReadyQueueNode *tail;
 } ReadyQueue;
-

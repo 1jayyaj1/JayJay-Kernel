@@ -10,7 +10,6 @@ int getNextAvailableIndex() {
 }
 
 void addToRAM(FILE* p, int* start, int* end) {
-    //TO IMPLEMENT
     int errCode = 0;
     char line[1000];
     if (p==NULL){
@@ -26,15 +25,10 @@ void addToRAM(FILE* p, int* start, int* end) {
         nextAvailableIndex++;
     }
     fclose(p);
-    // printf("The ram contains after adding: \n");
-    // for (int i = 0; i < 1000; i++) {
-    //     printf("%s\n", ram[i]);
-    // }
     *end = nextAvailableIndex-1;
 }
 
 char* getInstruction(int index){
-    // printf("%s",ram[index]);
     return ram[index];
 }
 
@@ -43,8 +37,4 @@ void cleanRam() {
         ram[i] = NULL;
     }
     nextAvailableIndex = 0;
-    // printf("The ram contains after cleaning: \n");
-    // for (int i = 0; i < 1000; i++) {
-    //     printf("%s\n", ram[i]);
-    // }
 }

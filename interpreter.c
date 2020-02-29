@@ -3,29 +3,11 @@
 #include <string.h> 
 #include "shellmemory.h"
 #include "kernel.h"
+#include "ram.h"
 
 void interpret(char* parsedInput, List *l);
 
-// char** parse(char userInput[]) {
-//     char ** parsedUserInput = malloc(100 * sizeof(char*));
-//     for (int i = 0 ; i < 100; ++i) {
-//         parsedUserInput[i] = malloc(100 * sizeof(char));
-//     }
-//     char tmp[200];
-//     int a,b;
-//     int w=0;
-//     for(a=0; userInput[a]==' ' && a<100; a++);
-//     while(userInput[a] != '\0' && a<100) {
-//         for(b=0; userInput[a]!='\0' && userInput[a]!=' ' && a<1000; a++, b++)
-//             tmp[b] = userInput[a];
-//         tmp[b] = '\0';
-//         parsedUserInput[w] = strdup(tmp);
-//         a++; w++;
-//     }
-//     return parsedUserInput;
-// }
-
-int getSize(char* str){
+int getSize (char* str) {
     size_t num_tokens = 1;
     int flag = 0;
     for (size_t i = 0; i < strlen(str); i++)
@@ -43,8 +25,7 @@ int getSize(char* str){
     return (int)num_tokens;
 }
 
-char **parse(char *str)
-{
+char **parse (char *str) {
     size_t num_tokens = 1;
     int flag = 0;
     for (size_t i = 0; i < strlen(str); i++)
@@ -145,7 +126,7 @@ void printVar(char** parsedInput, int num_tokens, List *l) {
     }
 }
 
-int runFile(char** parsedInput, int num_tokens, List *l) {
+void runFile(char** parsedInput, int num_tokens, List *l) {
     if (num_tokens > 4 || num_tokens < 2) {
         printf("Please use this format to run a text file: run SCRIPT.txt\n");
     } else {
@@ -153,8 +134,7 @@ int runFile(char** parsedInput, int num_tokens, List *l) {
         char line[1000];
         FILE *p = fopen(parsedInput[1],"rt");
         if (p==NULL){
-            printf("Script not found\n");
-            return 0;
+            printf("Error: %s can't be found.\n", parsedInput[1]);
         }
         fgets(line,999,p);
         while(!feof(p)) {
@@ -163,12 +143,30 @@ int runFile(char** parsedInput, int num_tokens, List *l) {
                 fclose(p);
             }
             fgets(line,999,p);
-            // printf("%s", line);
         }
         fclose(p);
-        return 0;
     }
-    return 0;
+}
+
+int getNumLines(char* filename){
+    int counter = 0;
+    FILE *p = fopen(filename,"rt");
+    if (p == NULL){
+        printf("Error: %s can't be found, exec command will be cancelled.\n", filename);
+        return -1;
+    }
+    int errCode = 0;
+    char line[1000];
+    fgets(line,999,p);
+    while(!feof(p)) {
+        if (errCode != 0) {
+            fclose(p);
+        }
+        fgets(line,999,p);
+        counter++;
+    }
+    fclose(p);
+    return counter;
 }
 
 int exec(char** parsedInput, int num_tokens, List *l) {
@@ -176,41 +174,61 @@ int exec(char** parsedInput, int num_tokens, List *l) {
         printf("Please use this format to execute programs: exec prog1.txt prog2.txt prog3.txt\n");
     } else {
         for (int i = 1; i < num_tokens; i++) {
-            myinit(parsedInput[i]);
+            int numLines = getNumLines(parsedInput[i]);
+            if (numLines == -1) {
+                cleanRam();
+                return -1;
+            }
+            int currRamIndex = getNextAvailableIndex();
+            if ((currRamIndex + numLines) >= 1000) {
+                printf("Error: ram is full, exec command will be cancelled\n");
+                cleanRam();
+                return -1;
+            } else {
+                for (int j = 1; j < num_tokens; j++) {
+                    if (strcmp(parsedInput[i],parsedInput[j]) == 0 && i != j) {
+                        printf("Error: %s is already loaded, exec command will be cancelled\n", parsedInput[i]);
+                        cleanRam();
+                        return -1;
+                    }
+                }
+                myinit(parsedInput[i]);
+            }
         }
         scheduler();
     }
     return 0;
 }
 
-int quit(int num_tokens) {
+void quit(int num_tokens) {
     if (num_tokens != 1) {
         printf("Use the command “quit” to quit the program.\n");
     } else {
         printf("Bye!\n");
         exit(0);
     }
-    return 0;
 }
 
 void interpret(char* parsedInput, List *l) {
     int num_tokens = getSize(parsedInput);
     char **tokens = parse(parsedInput);
-    if (strcmp(tokens[0], "help") == 0) {
-        help(num_tokens);
-    } else if (strcmp(tokens[0], "set") == 0) {
-        setVar(tokens,num_tokens,l);
-    } else if (strcmp(tokens[0], "print") == 0) {
-        printVar(tokens,num_tokens,l);
-    } else if (strcmp(tokens[0], "run") == 0) {
-        runFile(tokens,num_tokens,l);
-    } else if (strcmp(tokens[0], "exec") == 0) {
-        exec(tokens,num_tokens,l);
-    } else if (strcmp(tokens[0], "quit") == 0) {
-        quit(num_tokens);
-    } else {
-        if (strcmp(tokens[0], "") != 0) {
-            printf("Unknown command\n");
+    if(tokens[0] != NULL) {
+        if (strcmp(tokens[0], "help") == 0) {
+            help(num_tokens);
+        } else if (strcmp(tokens[0], "set") == 0) {
+            setVar(tokens,num_tokens,l);
+        } else if (strcmp(tokens[0], "print") == 0) {
+            printVar(tokens,num_tokens,l);
+        } else if (strcmp(tokens[0], "run") == 0) {
+            runFile(tokens,num_tokens,l);
+        } else if (strcmp(tokens[0], "exec") == 0) {
+            exec(tokens,num_tokens,l);
+        } else if (strcmp(tokens[0], "quit") == 0) {
+            quit(num_tokens);
+        } else {
+            if (strcmp(tokens[0], "") != 0) {
+                printf("Unknown command\n");
+            }
         }
     }
 }
